@@ -1,3 +1,6 @@
+"
+I represent the combination lock on a safe, for use in day 1
+"
 Class {
 	#name : 'Safe',
 	#superclass : 'Object',
@@ -5,8 +8,9 @@ Class {
 		'count',
 		'position'
 	],
-	#category : 'AOC2025',
-	#package : 'AOC2025'
+	#category : 'AOC2025-Support',
+	#package : 'AOC2025',
+	#tag : 'Support'
 }
 
 { #category : 'as yet unclassified' }
