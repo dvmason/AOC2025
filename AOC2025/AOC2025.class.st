@@ -48,3 +48,15 @@ AOC2025 class >> day02b: aString [
 	^ total
 	
 ]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day03a: aString [ 
+
+	^ (aString lines collect: #findLargestSum) sum
+]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day03b: aString [ 
+
+	^ (aString lines collect: #findAlternateLargestSum) sum
+]
