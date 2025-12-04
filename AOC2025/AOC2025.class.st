@@ -1,8 +1,12 @@
+"
+I have all the base methods (class side) for [Advent of Code 2025](https://adventofcode.com/2025)
+"
 Class {
 	#name : 'AOC2025',
 	#superclass : 'Object',
-	#category : 'AOC2025',
-	#package : 'AOC2025'
+	#category : 'AOC2025-Main',
+	#package : 'AOC2025',
+	#tag : 'Main'
 }
 
 { #category : 'AdventOfCode' }
@@ -59,4 +63,39 @@ AOC2025 class >> day03a: aString [
 AOC2025 class >> day03b: aString [ 
 
 	^ (aString lines collect: #findAlternateLargestSum) sum
+]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day04a: aString [
+
+	| matrix count |
+	matrix := Matrix rows: aString lines.
+	count := 0.
+	matrix allDo: [ :point |
+			(matrix at: point) = $@ ifTrue: [
+					| neighbours |
+					neighbours := 0.
+					matrix neighboursOf: point do: [ :v :p |
+							$@ = v ifTrue: [ neighbours := neighbours + 1 ] ].
+					neighbours < 4 ifTrue: [ count := count + 1 ] ] ].
+	^ count
+]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day04b: aString [
+
+	| matrix count found |
+	matrix := Matrix rows: aString lines.
+	count := 0.
+	found := true.
+	[ found ] whileTrue: [
+		found := false.
+		matrix allDo: [ :point |
+			(matrix at: point) = $@ ifTrue: [
+					| neighbours |
+					neighbours := 0.
+					matrix neighboursOf: point do: [ :v :p |
+							$@ = v ifTrue: [ neighbours := neighbours + 1 ] ].
+					neighbours < 4 ifTrue: [ count := count + 1. found := true. matrix at: point put: $. ] ] ]].
+	^ count
 ]
