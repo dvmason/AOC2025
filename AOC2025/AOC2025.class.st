@@ -99,3 +99,29 @@ AOC2025 class >> day04b: aString [
 					neighbours < 4 ifTrue: [ count := count + 1. found := true. matrix at: point put: $. ] ] ]].
 	^ count
 ]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day05a: aString [
+
+	| map adding count |
+	map := RangeMap new.
+	adding := true.
+	count := 0.
+	aString lines do: [ : line |
+		adding ifTrue: [
+			line = '' ifTrue: [ adding := false ] ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] 
+			 ] ifFalse: [ (map includes: line asInteger) ifTrue: [ count := count + 1 ] ] ].
+	^ count
+]
+
+{ #category : 'AdventOfCode' }
+AOC2025 class >> day05b: aString [
+
+	| map |
+	map := RangeMap new.
+	aString lines do: [ :line |
+		line = ''
+			ifTrue: [ ^ map uniqueValues ]
+			ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] ]
+
+]
