@@ -127,44 +127,44 @@ AOC2025 class >> day05b: aString [
 ]
 
 { #category : 'AdventOfCode' }
-AOC2025 class >> day06a: aString [ 
+AOC2025 class >> day06a: aString [
 
-	| converted total column elements operator |
+	| converted total elements operator |
 	converted := aString lines collect: [ :each |
-		((each splitOn: ' ') reject: #isEmpty) collect: [ : elem |
-			(elem at: 1) isDigit
-				ifTrue: [ elem asInteger ] ifFalse: [ elem asSymbol ] ] ].
+			             ((each splitOn: ' ') reject: #isEmpty) collect: [
+				             :elem | elem asInteger ifNil: [ elem asSymbol ] ] ].
 	total := 0.
-	column := 1.
-	[ (elements := converted column: column) isNotNil ] whileTrue: [
-		operator := elements last.
-		total := total + (elements allButLast inject: operator identity into: operator).
-		column := column + 1
-	].
+	1 to: converted last size do: [ :column |
+			elements := converted column: column.
+			operator := elements last.
+			total := total
+			         +
+			         (elements allButLast
+				          inject: operator identity
+				          into: operator) ].
 	^ total
 ]
 
 { #category : 'AdventOfCode' }
 AOC2025 class >> day06b: aString [
 
-	| lines total operator operators col data numbers |
+	| lines total operator operators data numbers |
 	lines := aString lines.
 	operators := lines last.
 	data := lines allButLast.
-	col := operators size.
 	total := 0.
 	numbers := OrderedCollection new.
-	[ col > 0 ] whileTrue: [
-		numbers add: (String streamContents: [ : s |
-			data do: [ :each |
-				| c |
-				c := each at: col.
-				c isSpaceSeparator ifFalse: [ s nextPut: c ] ]]) asInteger.
-		(operators at: col) isSpaceSeparator ifFalse: [
-			operator := (operators at: col) asSymbol.
-			total := total + (numbers inject: operator identity into: operator).
-			numbers reset.
-			col := col - 1 ].
-		col := col - 1 ].
+	operators size to: 1 by: -1 do: [ :col |
+			(String streamContents: [ :s |
+					 data do: [ :each |
+							 | c |
+							 c := each at: col.
+							 c isSpaceSeparator ifFalse: [ s nextPut: c ] ] ]) asInteger
+				ifNotNil: [ :n | numbers add: n ].
+			(operators at: col) isSpaceSeparator ifFalse: [
+					operator := (operators at: col) asSymbol.
+					total := total
+					         + (numbers inject: operator identity into: operator).
+					numbers reset ] ].
 	^ total
 ]
