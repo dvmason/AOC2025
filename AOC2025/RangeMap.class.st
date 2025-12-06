@@ -13,9 +13,9 @@ Class {
 }
 
 { #category : 'adding' }
-RangeMap >> add: aCollection [ 
+RangeMap >> add: aCollection [
 
-	ranges add: aCollection first @ aCollection last
+	ranges add: aCollection first asInteger @ aCollection last asInteger
 ]
 
 { #category : 'testing' }

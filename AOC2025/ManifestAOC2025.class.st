@@ -17,6 +17,13 @@ ManifestAOC2025 class >> ruleBadMessageRule2V1FalsePositive [
 ]
 
 { #category : 'code-critics' }
+ManifestAOC2025 class >> ruleCollectionProtocolRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#'AOC2025 class' #day05a: #true)) #'2025-12-06T10:57:37.208047-05:00') #(#(#RGMethodDefinition #(#'AOC2025 class' #day05b: #true)) #'2025-12-06T11:10:20.564089-05:00') )
+]
+
+{ #category : 'code-critics' }
 ManifestAOC2025 class >> ruleLongMethodsRuleV1FalsePositive [
 
 	<ignoreForCoverage>

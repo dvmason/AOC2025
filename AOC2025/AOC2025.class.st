@@ -103,31 +103,25 @@ AOC2025 class >> day04b: aString [
 { #category : 'AdventOfCode' }
 AOC2025 class >> day05a: aString [
 
-	| map adding count |
+	| map lines break |
 	map := RangeMap new.
-	adding := true.
-	count := 0.
-	aString lines do: [ :line |
-			adding
-				ifTrue: [
-						line = ''
-							ifTrue: [ adding := false ]
-							ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] ]
-				ifFalse: [
-				(map includes: line asInteger) ifTrue: [ count := count + 1 ] ] ].
-	^ count
+	lines := aString lines.
+	break := lines indexOf: ''.
+	(lines first: break - 1) do: [ :line |
+		map add: (line splitOn: $-) ].
+	^ (lines last: lines size - break) sum: [ :line |
+		  (map includes: line asInteger) asBit ]
 ]
 
 { #category : 'AdventOfCode' }
 AOC2025 class >> day05b: aString [
 
-	| map |
+	| map lines |
 	map := RangeMap new.
-	aString lines do: [ :line |
-		line = ''
-			ifTrue: [ ^ map uniqueValues ]
-			ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] ]
-
+	lines := aString lines.
+	(lines first: (lines indexOf: '') - 1) do: [ :line |
+		map add: (line splitOn: $-) ].
+	^ map uniqueValues
 ]
 
 { #category : 'AdventOfCode' }
