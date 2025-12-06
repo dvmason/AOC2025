@@ -107,10 +107,14 @@ AOC2025 class >> day05a: aString [
 	map := RangeMap new.
 	adding := true.
 	count := 0.
-	aString lines do: [ : line |
-		adding ifTrue: [
-			line = '' ifTrue: [ adding := false ] ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] 
-			 ] ifFalse: [ (map includes: line asInteger) ifTrue: [ count := count + 1 ] ] ].
+	aString lines do: [ :line |
+			adding
+				ifTrue: [
+						line = ''
+							ifTrue: [ adding := false ]
+							ifFalse: [ map add: ((line splitOn: $-) collect: #asInteger) ] ]
+				ifFalse: [
+				(map includes: line asInteger) ifTrue: [ count := count + 1 ] ] ].
 	^ count
 ]
 
